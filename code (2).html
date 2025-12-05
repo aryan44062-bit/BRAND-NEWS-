@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAND NEWS – Real India Today</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Header */
+        .header {
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-bottom: 1px solid #DDD;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Roboto', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #000;
+        }
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+        .nav a {
+            text-decoration: none;
+            color: #666;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .nav a:hover {
+            color: #000;
+        }
+        /* Breaking News Ticker */
+        .ticker {
+            background-color: #FF0000;
+            color: #FFF;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .ticker-content {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        /* Categories */
+        .categories {
+            background-color: #FFFFFF;
+            padding: 15px 0;
+            border-bottom: 1px solid #DDD;
+        }
+        .category-tabs {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+        .tab {
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            color: #666;
+            padding: 10px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab.active {
+            color: #000;
+            border-bottom: 2px solid #000;
+        }
+        .tab:hover {
+            color: #000;
+        }
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+        .news-card {
+            background-color: #FFFFFF;
+            border: 1px solid #DDD;
+            border-radius: 0;
+            padding: 20px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .news-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .news-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        .news-title:hover {
+            text-decoration: underline;
+        }
+        .news-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999;
+        }
+        .tags {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+        .tag {
+            background-color: #F0F0F0;
+            padding: 2px 6px;
+            margin-right: 5px;
+            border-radius: 0;
+        }
+        /* Footer */
+        .footer {
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-top: 1px solid #DDD;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+        .footer a {
+            color: #000;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            .category-tabs {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">BRAND NEWS – Real India Today</div>
+        <div class="nav">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <!-- Breaking News Ticker -->
+    <div class="ticker">
+        <div class="ticker-content">
+            BREAKING: Lok Sabha Session Updates | Sensex Hits New High | Adani Group Stocks Surge | Weather Alert in Delhi | India vs Australia Cricket Match | RBI Rate Cut Announced
+        </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="categories">
+        <div class="container">
+            <div class="category-tabs">
+                <div class="tab active" onclick="filterNews('all')">Top News</div>
+                <div class="tab" onclick="filterNews('business')">Business</div>
+                <div class="tab" onclick="filterNews('finance')">Finance</div>
+                <div class="tab" onclick="filterNews('sports')">Sports</div>
+                <div class="tab" onclick="filterNews('entertainment')">Entertainment</div>
+                <div class="tab" onclick="filterNews('world')">World</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- News Grid -->
+    <div class="container">
+        <div class="news-grid" id="news-grid">
+            <!-- Top News -->
+            <div class="news-card" data-category="all">
+                <a href="https://timesofindia.indiatimes.com/india/lok-sabha-session-live-updates-december-2023/articleshow/12345678.cms" target="_blank" class="news-title">Lok Sabha Session Live: Opposition Demands Probe into Adani Issue</a>
+                <div class="news-description">The opposition parties in the Lok Sabha today demanded a probe into the Adani Group controversy, with heated debates on the floor.</div>
+                <div class="news-meta">
+                    <span>Times of India</span>
+                    <span>2h ago</span>
+                </div>
+                <div class="tags">
+                    <span class="tag">#LokSabha</span>
+                    <span class="tag">#Adani</span>
+                    <span class="tag">#Politics</span>
+                </div>
+            </div>
+            <div class="news-card" data-category="all">
+                <a href="https://www.ndtv.com/india-news/delhi-weather-alert-heavy-rains-expected-tomorrow-12345684" target="_blank" class="news-title">Delhi Weather Alert: Heavy Rains Expected Tomorrow</a>
+                <div class="news-description">The India Meteorological Department has issued a red alert for Delhi-NCR, predicting heavy rainfall and possible flooding.</div>
+                <div class="news-meta">
+                    <span>NDTV</span>
+                    <span>1h ago</span>
+                </div>
+                <div class="tags">
+                    <span class="tag">#Weather</span>
+                    <span class="tag">#Delhi</span>
+                    <span class="tag">#CurrentAffairs</span>
+                </div>
+            </div>
+            <div class="news-card" data-category="all">
+                <a href="https://www.indiatoday.in/india/story/pm-modi-addresses-nation-on-economic-reforms-12345685" target="_blank" class="news-title">PM Modi Addresses Nation on Economic Reforms</a>
+                <div class="news-description">Prime Minister Narendra Modi outlined new economic reforms in his address, focusing on job creation and infrastructure development.</div>
+                <div class="news-meta">
+                    <span>India Today</span>
+                    <span>3h ago</span>
+                </div>
+                <div class="tags">
+                    <span class="tag">#PMModi</span>
+                    <span class="tag">#Economy</span>
+                    <span class="tag">#Reforms</span>
+                </div>
+            </div>
+            <!-- Business -->
+            <div class="news-card" data-category="business">
+                <a href="https://economictimes.indiatimes.com/markets/stocks/news/sensex-surges-500-points-on-strong-earnings/articleshow/12345679.cms" target="_blank" class="news-title">Sensex Surges 500 Points on Strong Earnings from IT Sector</a>
+                <div class="news-description">The BSE Sensex jumped over 500 points today, driven by robust quarterly earnings from major IT companies like TCS and Infosys.</div>
+                <div class="news-meta">
+                    <span>Economic Times</span>
+                    <span>1h ago</span>
+                </div>
+                <div class="tags">
+                    <span class="tag">#Sensex</span>
+                    <span class="tag">#IT</span>
+                    <span class="tag">#Markets</span>
+                </div>
+            </div>
+            <div class="news-card" data-category="business">
+                <a href="https://www.hindustantimes.com/business/religare-enters-healthcare-sector-with-new-acquisition-12345686" target="_blank" class="news-title">Religare Enters Healthcare Sector with New Acquisition</a>
+                <div class="news-description">Religare Enterprises has acquired a major stake in a leading healthcare chain, expanding its footprint in the medical industry.</div>
+                <div class="news-meta">
+                    <span>Hindustan Times</span>
+                    <span>4h ago</span>
+                </div>
+                <div class="tags">
+                    <span class="tag">#Healthcare</span>
+                    <span class="tag">#Acquisition</span>
+                    <span class="tag">#Business</span>
+                </div>
+            </div>
+            <div class="news-card" data-category="business">
+                <a href="https://www.timesnownews.com/business/tata-group-launches-new-electric-vehicle-line-12345687" target="_blank" class="news-title">Tata Group Launches New Electric Vehicle Line</a>
+                <div class="news-description">Tata Motors unveiled its latest electric vehicle models, aiming to capture a larger share of the green mobility market.</div>
+                <div class="news-meta">
+                    <span>Times Now</span>
+                    <span>5h ago</span>
+                </div>
+                <div class="tags">
+                    <span class="tag">#Tata</span>
+                    <span class="tag">#EV</span>
+                    <span class="tag">#Technology</span>
+                </div>
+            </div>
+            <!-- Finance -->
+            <div class="news-card" data-category="finance">
+                <a href="https://www.ndtv.com/business/rbi-announces-new-repo-rate-cut-to-boost-economy-12345680" target="_blank" class="news-title">RBI Announces New Repo Rate Cut to Boost Economy</a>
+                <div class="news-description">The Reserve Bank of India has slashed the repo rate by 0.25% to stimulate economic growth amid inflationary pressures.</div>
+                <div class="news-meta">
+                    <span>NDTV</span>
+                    <span>3h ago</span>
+                </div>
+                <div class="tags">
+                    <span class="tag">#RBI</span>
+                    <span class="tag">#Economy</span>
+                    <span class="tag">#Finance</span>
+                </div>
+            </div>
+            <div class="news-card" data-category="finance">
+                <a href="https://economictimes.indiatimes.com/mf/mutual-funds/news/sip-investments-hit-record-high-this-quarter/articleshow/12345688.cms" target="_blank" class="news-title">SIP Investments Hit Record High This Quarter</a>
+                <div class="news-description">Systematic Investment Plans saw a surge in investments, with retail investors pouring in over ₹50,000 crores in mutual funds.</div>
+                <div class="news-meta">
+                    <span>Economic Times</span>
+                    <span>2h ago</span>
+                </div>
+                <div class="tags">
+                    <span class="tag">#SIP</span>
+                    <span class="tag">#MutualFunds</span>
+                    <span class="tag">#Investments</span>
+                </div>
+            </div>
+            <div class="news-card" data-category="finance">
+                <a href="https://www.hindustantimes.com/business/cryptocurrency-ban-in-india-what-next-for-investors-12345689" target="_blank" class="news-title">Cryptocurrency Ban in India: What Next for Investors?</a>
+                <div class="news-description">Following the Supreme Court's decision on crypto regulations, experts discuss the future of digital currencies in the Indian market.</div>
+                <div class="news-meta">
+                    <span>Hindustan Times</span>
+                    <span>6h ago</span>
+                </div>
+                <div class="tags">
+                    <span class="tag">#Crypto</span>
+                    <span class="tag">#SupremeCourt</span>
+                    <span class="tag">#Finance</span>
+                </div>
+            </div>
+            <!-- Sports -->
+            <div class="news-card" data-category="sports">
+                <a href="https://www.indiatoday.in/sports/cricket/story/india-vs-australia-test-series-live-score-12345681" target="_blank" class="news-title">India vs Australia: Rohit Sharma Leads Team to Victory in First Test</a>
+                <div class="news-description">Rohit Sharma's century helped India secure a convincing win in the opening Test match against Australia in Nagpur.</div>
+                <div class="news-meta">
+                    <span>India Today</span>
+                    <span>4h ago</span>
+                </div>
+                <div class="tags">
+                    <span class="tag">#Cricket</span>
+                    <span class="tag">#India</span>
+                    <span class="tag">#Australia</span>
+                </div>
+            </div>
+            <div class="news-card" data-category="sports">
+                <a href="https://timesofindia.indiatimes.com/sports/football/top-stories/isl-2023-mumbai-city-fc-wins-championship/articleshow/12345690.cms" target="_blank" class="news-title">ISL 2023: Mumbai City FC Wins Championship</a>
+                <div class="news-description">Mumbai City FC clinched the Indian Super League title after a thrilling final match against ATK Mohun Bagan.</div>
+                <div class="news-meta">
+                    <span>Times of India</span>
+                    <span>7h ago</span>
+                </div>
+                <div class="tags">
+                    <span class="tag">#ISL</span>
+                    <span class="tag">#Football</span>
+                    <span class="tag">#Championship</span>
+                </div>
+            </div>
+            <div class="news-card" data-category="sports">
+                <a href="https://www.ndtv.com/sports/tennis/novak-djokovic-wins-wimbledon-2023-12345691" target="_blank" class="news-title">Novak Djokovic Wins Wimbledon 2023</a>
+                <div class="news-description">Serbia's Novak Djokovic defeated Carlos Alcaraz in the Wimbledon final, securing his 24th Grand Slam title.</div>
+                <div class="news-meta">
+                    <span>NDTV</span>
+                    <span>8h ago</span>
+                </div>
+                <div class="tags">
+                    <span class="tag">#Tennis</span>
+                    <span class="tag">#Wimbledon</span>
+                    <span class="tag">#Djokovic</span>
+                </div>
+            </div>
+            <!-- Entertainment -->
+            <div class="news-card" data-category="entertainment">
+                <a href="https://www.timesnownews.com/entertainment/bollywood/ranveer-singh-announces-new-film-project-12345682" target="_blank" class="news-title">Ranveer Singh Announces New Film Project with Deepika Padukone</a>
+                <div class="news-description">Bollywood star Ranveer Singh revealed details of his upcoming film alongside Deep
